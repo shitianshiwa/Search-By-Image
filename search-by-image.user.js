@@ -40,6 +40,7 @@ var default_setting = {
 		"Yandex": "https://yandex.ru/images/search?rpt=imageview&img_url={%s}", // change "Яндекс (Yandex)" to "Yandex"
 		"Sogou": "https://pic.sogou.com/ris?query={%s}&flag=1&drag=0",
 		"360 ShiTu": "http://st.so.com/stu?imgurl={%s}",
+        //"360 ShiTu": "http://st.so.com/stu?a=list&imgkey={%s}",
 		"SauceNAO": "https://saucenao.com/search.php?db=999&url={%s}",
 		"IQDB": "https://iqdb.org/?url={%s}",
 		"3D IQDB": "https://3d.iqdb.org/?url={%s}",
@@ -171,7 +172,7 @@ function init() {
 						}
 						new_site_list['WhatAnime'] = default_setting.site_list['WhatAnime'];
 
-						for (var i = 0; i < setting.site_option.length; i++) {
+						for (let i = 0; i < setting.site_option.length; i++) {
 							if ((setting.site_option[i] === 'Baidu ShiTu' || setting.site_option[i] === 'Baidu Image') && !(/,?Baidu,?/.test(new_site_option.join(',')))) {
 								new_site_option.push('Baidu');
 							}
@@ -202,7 +203,7 @@ function init() {
 
 		var repeatTest = {};
 		var finalOpt = [];
-		for (var i = 0, len = setting.site_option.length; i < len; i++) {
+		for (let i = 0, len = setting.site_option.length; i < len; i++) {
 			var cur = setting.site_option[i];
 			if (!repeatTest[cur] && setting.site_list[cur]) {
 				finalOpt.push(cur);
@@ -526,8 +527,8 @@ document.addEventListener('mousedown', function(event) {
 						break;
 					default:
 						if (img_src != null) {
-							var rsrc = img_src;
-							var turl = setting.site_list[event.target.getAttribute('search-option')];
+							let rsrc = img_src;
+							let turl = setting.site_list[event.target.getAttribute('search-option')];
 							if (turl.substr(0, turl.indexOf('{%s}')).indexOf('?') >= 0) {
 								rsrc = encodeURIComponent(img_src);
 							}
