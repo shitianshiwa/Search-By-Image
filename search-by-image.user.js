@@ -176,12 +176,12 @@ function init() {
     document.head.appendChild(style); //给head头添加新样式节点
 
     setTimeout(() => { //延时进行动作，才有效
-        var b1 = false,
+        let b1 = false,
             b2 = false,
             b3 = 0; //解决按键点击动作与移动按钮动作之间的冲突
-        var s1 = new Array('', 'soutux');
-        var s2 = new Array("隐藏↑", "搜图");
-        var temp2 = new Array();
+        let s1 = new Array('', 'soutux');
+        let s2 = new Array("隐藏↑", "搜图");
+        let temp2 = new Array();
         try {
             var mouseX = sessionStorage.getItem("soutux") || null;
             var mouseY = sessionStorage.getItem("soutuy") || null;
@@ -222,7 +222,7 @@ function init() {
                         if (b3 == 2) //3
                         {
                             b3 = 0;
-                            temp2[0].value = "隐藏↑  ";
+                            temp2[0].value = "隐藏↑";
                             for (let i = 1; i < s2.length; i++) {
                                 temp2[i].style = "display:block;"; //修改样式
                             }
