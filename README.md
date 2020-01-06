@@ -9,6 +9,8 @@ Search By Image | 以图搜图
 > https://greasyfork.org/scripts/2998-search-by-image
 > 
 > http://ext.ccloli.com/search-by-image/search-by-image.user.js
+>
+> https://github.com/shitianshiwa/Search-By-Image/raw/master/search-by-image.user.js
 
 使用方法：
 > * 搜索图片：按住快捷键（默认设置为 Ctrl 键），同时在图片上点击鼠标右键，在菜单中选择欲使用的搜索引擎
@@ -73,7 +75,8 @@ Search By Image | 以图搜图
 > 另外，搜索贴吧内图片时，如果出现搜索的 url 为 base64 的情况，请看此贴：http://tieba.baidu.com/p/3145502558
 
 更新历史：
-
+> 2020-1-6 新增可折叠移动的搜图按钮
+---
 > 2019.07.16 1.6.5 Support latest Baidu Graph (See Greasyfork [#60156](https://greasyfork.org/zh-CN/forum/discussion/60156))
 >
 > 2019.01.18 1.6.4 Support Blob URL and FileSystem URL ([#6](https://github.com/ccloli/Search-By-Image/issues/6))
