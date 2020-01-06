@@ -211,6 +211,7 @@ function init() {
             temp2[0].addEventListener('click', () => {
                     if (temp2[0].value == "隐藏↑") //1
                     {
+                        hide_panel();
                         b1 = true;
                         temp2[0].value = "展开↓ ";
                         temp2[0].value = "展开↓" + (b3 + 1);
