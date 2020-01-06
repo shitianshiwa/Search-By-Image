@@ -183,8 +183,8 @@ function init() {
         let s2 = new Array("隐藏↑", "搜图");
         let temp2 = new Array();
         try {
-            var mouseX = sessionStorage.getItem("soutux") || null;
-            var mouseY = sessionStorage.getItem("soutuy") || null;
+            var mouseX = localStorage.getItem("soutux") || null;
+            var mouseY = localStorage.getItem("soutuy") || null;
             const style = document.createElement('style'); //创建新样式节点
             style.textContent = soutucss; //添加样式内容
             document.head.appendChild(style); //给head头添加新样式节点
@@ -195,8 +195,8 @@ function init() {
                 temp1.style.left = mouseX + "px"; //设置left数值
                 temp1.style.top = mouseY + "px"; //设置top数值
             } else {
-                temp1.style.left = window.innerWidth * 0.90 + "px";
-                temp1.style.bottom = "30px";
+                temp1.style.left = window.innerWidth * 0.85 + "px";
+                temp1.style.bottom = "100px";
             }
             for (let i = 0; i < s2.length; i++) {
                 temp2[i] = document.createElement("input"); //创建节点<input/>
@@ -250,8 +250,8 @@ function init() {
                         {
                             temp1.style.left = event.x - 30 + "px"; //设置left数值
                             temp1.style.top = event.y - 15 + "px"; //设置top数值
-                            sessionStorage.setItem("soutux", event.x - 30);
-                            sessionStorage.setItem("soutuy", event.y - 15);
+                            localStorage.setItem("soutux", event.x - 30);
+                            localStorage.setItem("soutuy", event.y - 15);
                         }
                     })
                 })
