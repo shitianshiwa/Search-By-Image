@@ -5,12 +5,12 @@ Search By Image | 以图搜图
 
 一个以图搜图的脚本。通过该脚本，你可以快速地搜索图片。
 
-备用下载地址：
+[这里的安装地址](https://github.com/shitianshiwa/Search-By-Image/raw/master/search-by-image.user.js)
+
+原作者的下载地址：
 > https://greasyfork.org/scripts/2998-search-by-image
 > 
 > http://ext.ccloli.com/search-by-image/search-by-image.user.js
->
-> https://github.com/shitianshiwa/Search-By-Image/raw/master/search-by-image.user.js
 
 使用方法：
 > * 搜索图片：按住快捷键（默认设置为 Ctrl 键），同时在图片上点击鼠标右键，在菜单中选择欲使用的搜索引擎
