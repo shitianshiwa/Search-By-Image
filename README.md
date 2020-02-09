@@ -5,7 +5,11 @@ Search By Image | 以图搜图
 
 一个以图搜图的脚本。通过该脚本，你可以快速地搜索图片。
 
-[这里的安装地址](https://github.com/shitianshiwa/Search-By-Image/raw/master/search-by-image.user.js)
+1.下载这个 https://www.tampermonkey.net/
+
+2.[这里的安装地址](https://github.com/shitianshiwa/Search-By-Image/raw/master/search-by-image.user.js)
+
+3.如果安装不了，可以直接新建脚本，把search-by-image.user.js里的代码复制过去
 
 原作者的下载地址：
 > https://greasyfork.org/scripts/2998-search-by-image
