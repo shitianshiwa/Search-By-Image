@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Search By Image
-// @version     1.6.5(0.01)
+// @version     1.6.5(0.011)
 // @description Search By Image | 以图搜图
 // @match       <all_urls>
 // @include     *
@@ -76,11 +76,11 @@ var default_setting = {
         //"360 ShiTu": "http://st.so.com/stu?a=list&imgkey={%s}",
         "SauceNAO": "https://saucenao.com/search.php?db=999&url={%s}",
         "IQDB": "https://iqdb.org/?url={%s}",
-        "3D IQDB": "https://3d.iqdb.org/?url={%s}",
+        //"3D IQDB": "https://3d.iqdb.org/?url={%s}",
         "WhatAnime": "https://trace.moe/?url={%s}",
         "Ascii2D": "https://ascii2d.net/search/url/{%s}"
     },
-    "site_option": ["Google", "Baidu", "Bing", "TinEye", "Yandex", "Sogou", "360 ShiTu", "SauceNAO", "IQDB", "3D IQDB", "WhatAnime", "Ascii2D"],
+    "site_option": ["Google", "Baidu", "Bing", "TinEye", "Yandex", "Sogou", "360 ShiTu", "SauceNAO", "IQDB", /*"3D IQDB",*/ "WhatAnime", "Ascii2D"],
     "hot_key": "ctrlKey",
     "server_url": "//sbi.ccloli.com/img/upload.php"
 };
