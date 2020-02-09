@@ -56,7 +56,7 @@ Search By Image | 以图搜图
 > * 360
 > * SauceNAO
 > * IQDB
-> * 3D IQDB
+> * 3D IQDB（已注释）
 
 内部测试：
 > * 864907600cc (ccloli)
