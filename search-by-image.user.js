@@ -22,6 +22,7 @@
 // @updateURL   http://ext.ccloli.com/search-by-image/search-by-image.user.js
 // @downloadURL http://ext.ccloli.com/search-by-image/search-by-image.user.js
 // @namespace   http://ext.ccloli.com
+// @grant       GM_registerMenuCommand
 // ==/UserScript==
 
 
@@ -183,8 +184,8 @@ function init() {
         let s2 = new Array("隐藏↑", "搜图");
         let temp2 = new Array();
         try {
-            var mouseX = localStorage.getItem("soutux") || null;
-            var mouseY = localStorage.getItem("soutuy") || null;
+            var mouseX = sessionStorage.getItem("soutux") || null;
+            var mouseY = sessionStorage.getItem("soutuy") || null;
             const style = document.createElement('style'); //创建新样式节点
             style.textContent = soutucss; //添加样式内容
             document.head.appendChild(style); //给head头添加新样式节点
@@ -250,8 +251,8 @@ function init() {
                         {
                             temp1.style.left = event.x - 30 + "px"; //设置left数值
                             temp1.style.top = event.y - 15 + "px"; //设置top数值
-                            localStorage.setItem("soutux", event.x - 30);
-                            localStorage.setItem("soutuy", event.y - 15);
+                            sessionStorage.setItem("soutux", event.x - 30);
+                            sessionStorage.setItem("soutuy", event.y - 15);
                         }
                     })
                 })
@@ -672,4 +673,11 @@ function action(event) {
 if (typeof GM_registerMenuCommand !== 'undefined') {
     var gm_callsetting = GM_registerMenuCommand('Search By Image Setting', call_setting);
 }
+
+function resetx() {
+    sessionStorage.removeItem("soutux");
+    sessionStorage.removeItem("soutuy");
+    alert("已重置！");
+}
+GM_registerMenuCommand("重置为默认位置", resetx); // @grant        GM_registerMenuCommand
 init();
