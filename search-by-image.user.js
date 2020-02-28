@@ -195,7 +195,7 @@ function init() {
                 temp1.style.left = mouseX + "px"; //设置left数值
                 temp1.style.top = mouseY + "px"; //设置top数值
             } else {
-                temp1.style.left = window.innerWidth * 0.85 + "px";
+                temp1.style.left = window.innerWidth * 0.89 + "px";
                 temp1.style.bottom = "100px";
             }
             for (let i = 0; i < s2.length; i++) {
