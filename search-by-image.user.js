@@ -261,7 +261,7 @@ function init() {
         } catch (error) {
             //alert(error);
         }
-    }, 1000);
+    }, 2000);
     //https://www.runoob.com/jsref/met-element-addeventlistener.html HTML DOM addEventListener() 方法
     /*document.getElementById("myBtn").addEventListener("click", function(){
     document.getElementById("demo").innerHTML = "Hello World";
