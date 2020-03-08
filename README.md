@@ -7,7 +7,7 @@ Search By Image | 以图搜图
 
 1.下载这个 https://www.tampermonkey.net/
 
-2.[这里的安装地址](https://github.com/shitianshiwa/Search-By-Image/raw/master/search-by-image.user.js)
+2.[这里的安装地址](https://github.com/shitianshiwa/Search-By-Image/raw/%E4%BF%AE%E6%94%B9%E7%89%88/search-by-image.user.js)
 
 3.如果安装不了，可以直接新建脚本，把search-by-image.user.js里的代码复制过去
 
