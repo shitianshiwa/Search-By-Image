@@ -65,6 +65,7 @@ const soutucss = `
 }
 `;
 var default_setting = {
+<<<<<<< HEAD
     "site_list": {
         "Google": "https://www.google.com/searchbyimage?image_url={%s}",
         "Baidu": "https://graph.baidu.com/details?isfromtusoupc=1&tn=pc&carousel=0&promotion_name=pc_image_shituindex&extUiData%5bisLogoShow%5d=1&image={%s}",
@@ -84,6 +85,26 @@ var default_setting = {
     "site_option": ["Google", "Baidu", "Bing", "TinEye", "Yandex", "Sogou", "360 ShiTu", "SauceNAO", "IQDB", /*"3D IQDB",*/ "WhatAnime", "Ascii2D"],
     "hot_key": "ctrlKey",
     "server_url": "//sbi.ccloli.com/img/upload.php"
+=======
+	"site_list": {
+		"Google": "https://www.google.com/searchbyimage?image_url={%s}",
+		"Baidu": "https://graph.baidu.com/details?isfromtusoupc=1&tn=pc&carousel=0&promotion_name=pc_image_shituindex&extUiData%5bisLogoShow%5d=1&image={%s}",
+		"Bing": "https://www.bing.com/images/searchbyimage?cbir=sbi&iss=sbi&imgurl={%s}",
+		"TinEye": "https://www.tineye.com/search?url={%s}",
+		//"Cydral": "http://www.cydral.com/#url={%s}",
+		"Yandex": "https://yandex.ru/images/search?rpt=imageview&img_url={%s}", // change "Яндекс (Yandex)" to "Yandex"
+		"Sogou": "https://pic.sogou.com/ris?query={%s}&flag=1&drag=0",
+		"360 ShiTu": "http://st.so.com/stu?imgurl={%s}",
+		"SauceNAO": "https://saucenao.com/search.php?db=999&url={%s}",
+		"IQDB": "https://iqdb.org/?url={%s}",
+		"3D IQDB": "https://3d.iqdb.org/?url={%s}",
+		"WhatAnime": "https://trace.moe/?url={%s}",
+		"Ascii2D": "https://ascii2d.net/search/url/{%s}"
+	},
+	"site_option": ["Google", "Baidu", "Bing", "TinEye", "Yandex", "Sogou", "360 ShiTu", "SauceNAO", "IQDB", "3D IQDB", "WhatAnime", "Ascii2D"],
+	"hot_key": "ctrlKey",
+	"server_url": "//sbi.ccloli.com/img/upload.php"
+>>>>>>> parent of 6dc9a91... Update search-by-image.user.js
 };
 
 /*var server_url = "//sbi.ccloli.com/img/upload.php";*/
@@ -172,6 +193,7 @@ if (typeof GM_getValue === 'undefined' && typeof GM !== 'undefined') {
 }
 
 function init() {
+<<<<<<< HEAD
     const style = document.createElement('style'); //创建新样式节点
     style.textContent = soutucss; //添加样式内容
     document.head.appendChild(style); //给head头添加新样式节点
@@ -345,6 +367,85 @@ function init() {
             set_setting(setting);
         }
     });
+=======
+	return Promise.all([getValue('setting'), GM_getValue('version', 0), GM_getValue('timestamp', 0)]).then(function(res) {
+		var s = res[0], v = res[1], t = res[2];
+		setting = s ? JSON.parse(s) : default_setting;
+		data_version = v;
+		last_update = t;
+
+		if (data_version < 7) {
+			if (data_version < 6) {
+				if (data_version < 5) {
+					if (data_version < 4) {
+						var new_site_list = {};
+						var new_site_option = [];
+
+						for (var i in setting.site_list) {
+							// use for loop to keep order, will use array in 2.x
+							switch (i) {
+								case 'Baidu ShiTu':
+								case 'Baidu Image':
+									new_site_list['Baidu'] = default_setting.site_list['Baidu'];
+									break;
+
+								case 'Bing':
+								case 'Sogou':
+									new_site_list[i] = default_setting.site_list[i];
+									break;
+
+								default:
+									new_site_list[i] = setting.site_list[i];
+							}
+						}
+						new_site_list['WhatAnime'] = default_setting.site_list['WhatAnime'];
+
+						for (var i = 0; i < setting.site_option.length; i++) {
+							if ((setting.site_option[i] === 'Baidu ShiTu' || setting.site_option[i] === 'Baidu Image') && !(/,?Baidu,?/.test(new_site_option.join(',')))) {
+								new_site_option.push('Baidu');
+							}
+							else {
+								new_site_option.push(setting.site_option[i]);
+							}
+						}
+						new_site_option.push('WhatAnime');
+
+						setting.site_list = new_site_list;
+						setting.site_option = new_site_option;
+					}
+
+					setting.site_list['Ascii2D'] = default_setting.site_list['Ascii2D'];
+					setting.site_option.push('Ascii2D');
+				}
+				if (setting.site_list['WhatAnime']) {
+					setting.site_list['WhatAnime'] = default_setting.site_list['WhatAnime'];
+				}
+			}
+			if (setting.site_list['Baidu']) {
+				setting.site_list['Baidu'] = default_setting.site_list['Baidu'];
+			}
+			set_setting(setting);
+
+			GM_setValue('version', data_version = 7);
+		}
+
+		var repeatTest = {};
+		var finalOpt = [];
+		for (var i = 0, len = setting.site_option.length; i < len; i++) {
+			var cur = setting.site_option[i];
+			if (!repeatTest[cur] && setting.site_list[cur]) {
+				finalOpt.push(cur);
+				repeatTest[cur] = 1;
+			}
+		}
+		setting.site_option = finalOpt;
+
+		if (setting.server_url == null || setting.server_url == '') {
+			setting.server_url = default_setting.server_url;
+			set_setting(setting);
+		}
+	});
+>>>>>>> parent of 6dc9a91... Update search-by-image.user.js
 }
 
 var server_url = setting.server_url;
@@ -576,7 +677,105 @@ function upload_blob_url(url) {
 
 //document.addEventListener('mousedown', function(event) {alert("22333")});
 document.addEventListener('mousedown', function(event) {
+<<<<<<< HEAD
     action(event);
+=======
+	//console.log('Search Image >>\nevent.ctrlKey: '+event.ctrlKey+'\nevent.button: '+event.button+'\nevent.target:'+event.target+'\nevent.target.tagName: '+event.target.tagName+'\nevent.target.src: '+event.target.src+'\nevent.pageX: '+event.pageX+'\nevent.pageY: '+event.pageY+'\ndocument.documentElement.clientWidth: '+document.documentElement.clientWidth+'\ndocument.documentElement.clientHeight: '+document.documentElement.clientHeight+'\ndocument.documentElement.scrollWidth: '+document.documentElement.scrollWidth+'\ndocument.documentElement.scrollHeight: '+document.documentElement.scrollHeight+'\ndocument.documentElement.scrollLeft: '+document.documentElement.scrollLeft+'\ndocument.documentElement.scrollTop: '+document.documentElement.scrollTop);
+	if (disable_contextmenu == true) {
+		document.oncontextmenu = null;
+		disable_contextmenu = false;
+	}
+	if (event[setting.hot_key] == true && event.button == 2) {
+		if (search_panel == null) create_panel();
+		// GM 4.x api is async, so we cannot update it in time
+		else {
+			if (!asyncGMAPI) {
+				if (last_update != GM_getValue('timestamp', 0)) {
+					last_update = GM_getValue('timestamp', 0);
+					search_panel.parentElement && search_panel.parentElement.removeChild(search_panel);
+					setting = GM_getValue('setting') ? JSON.parse(GM_getValue('setting')) : default_setting;
+					create_panel();
+				}
+				else document.body.appendChild(search_panel);
+			}
+			else {
+				document.body.appendChild(search_panel);
+				GM_getValue('timestamp', 0).then(function (t) {
+					if (last_update != t) {
+						last_update = t;
+						search_panel.parentElement && search_panel.parentElement.removeChild(search_panel);
+						GM_getValue('setting').then(function (s) {
+							setting = s ? JSON.parse(s) : default_setting;
+						});
+					}
+				});
+			}
+		}
+		search_panel.style.left = (document.documentElement.offsetWidth + (document.documentElement.scrollLeft || document.body.scrollLeft) - event.pageX >= 200 ? event.pageX : event.pageX >= 200 ? event.pageX - 200 : 0) + 'px';
+		search_panel.style.top = (event.pageY + search_panel.offsetHeight < (document.documentElement.scrollTop || document.body.scrollTop) + document.documentElement.clientHeight ? event.pageY : event.pageY >= search_panel.scrollHeight ? event.pageY - search_panel.offsetHeight : 0) + 'px';
+		// Firefox doesn't support getComputedStyle(element).marginLeft/marginRight and it would return "0px" while the element's margin is "auto". See bugzila/381328.
+		//search_panel.style.marginLeft = '-' + (navigator.userAgent.indexOf('Firefox') < 0 ? getComputedStyle(document.body).marginLeft : (document.documentElement.offsetWidth - document.body.offsetWidth) / 2 + 'px');
+		//search_panel.style.marginTop = '-' + getComputedStyle(document.body).marginTop;
+		disable_contextmenu = true;
+		document.oncontextmenu = function() {
+			return false;
+		};
+		if (event.target.tagName.toLowerCase() == 'img' && event.target.src != null) {
+			search_panel.getElementsByClassName('search_top_url')[0].style.marginTop = '0px';
+			search_panel.getElementsByClassName('search_top_url')[0].textContent = event.target.src;
+			if (/^data:\s*.*?;\s*base64,\s*/.test(event.target.src)) upload_file(event.target.src);
+			else if (/^(?:blob:|filesystem:)/.test(event.target.src)) upload_blob_url(event.target.src);
+			else img_src = event.target.src;
+		}
+		else {
+			search_panel.getElementsByClassName('search_top_url')[0].style.marginTop = '-24px';
+			var firefoxPasteNode = document.getElementsByClassName('image-search-paste-node-firefox')[0];
+			if (navigator.userAgent.indexOf('Firefox') >= 0 && firefoxPasteNode) {
+				firefoxPasteNode.innerHTML = '';
+				firefoxPasteNode.focus();
+			}
+			else document.addEventListener('paste', get_clipboard, false);
+		}
+	}
+	else if (search_panel != null) {
+		if (event.target.compareDocumentPosition(search_panel) == 10 || event.target.compareDocumentPosition(search_panel) == 0) {
+			if (event.target.className == 'image-search-item' && event.button == 0) {
+				switch (event.target.getAttribute('search-option')) {
+					case 'all':
+						if (img_src != null) {
+							for (var i = setting.site_option.length - 1; i >= 0; i--) {
+								var rsrc = img_src;
+								var turl = setting.site_list[setting.site_option[i]];
+								if (turl.substr(0, turl.indexOf('{%s}')).indexOf('?') >= 0) {
+									rsrc = encodeURIComponent(img_src);
+								}
+								GM_openInTab(turl.replace(/\{%s\}/, rsrc), event[setting.hot_key]);
+							}
+							hide_panel();
+						}
+						break;
+					case 'setting':
+						call_setting();
+						hide_panel();
+						break;
+					default:
+						if (img_src != null) {
+							var rsrc = img_src;
+							var turl = setting.site_list[event.target.getAttribute('search-option')];
+							if (turl.substr(0, turl.indexOf('{%s}')).indexOf('?') >= 0) {
+								rsrc = encodeURIComponent(img_src);
+							}
+
+							GM_openInTab(turl.replace(/\{%s\}/, rsrc), event[setting.hot_key]);
+							hide_panel();
+						}
+				}
+			}
+			else if (event.button != 0) hide_panel();
+		}
+		else hide_panel();
+	}
+>>>>>>> parent of 6dc9a91... Update search-by-image.user.js
 }, true);
 
 function action(event) {
