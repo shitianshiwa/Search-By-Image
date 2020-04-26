@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name        Search By Image
-// @version     1.6.6(0.012)
+// @version     1.6.6(0.013)
 // @description Search By Image | 以图搜图
 // @match       <all_urls>
 // @include     *
 // @author      864907600cc
 // @icon        http://1.gravatar.com/avatar/147834caf9ccb0a66b2505c753747867
-// @run-at      document-start
+// @run-at      document-body
 // @grant       GM.getValue
 // @grant       GM.setValue
 // @grant       GM.openInTab
@@ -23,6 +23,7 @@
 // @downloadURL http://ext.ccloli.com/search-by-image/search-by-image.user.js
 // @namespace   http://ext.ccloli.com
 // @grant       GM_registerMenuCommand
+// @noframes
 // ==/UserScript==
 
 
@@ -257,13 +258,7 @@ function init() {
                     })
                 })
                 //-----------------------
-            setTimeout(() => {
-                var temp3 = document.body; //尝试解决某些网页会出现多个按钮的bug
-                //console.log(temp3.getElementsByTagName("iframe").length)
-                if (temp3 != null && temp3.getElementsByTagName("iframe").length > 0) {
-                    temp3.appendChild(temp1);
-                }
-            }, 1000);
+            document.body.appendChild(temp1);
         } catch (error) {
             //alert(error);
         }
@@ -693,6 +688,7 @@ function resetx() {
         // console.log(temp)
     temp[0].style.left = window.innerWidth * 0.89 + "px";
     temp[0].style.bottom = "100px"; //不刷新就归位
+    temp[0].style.top = "unset";
     alert("已重置！");
 }
 GM_registerMenuCommand("重置为默认位置", resetx); // @grant        GM_registerMenuCommand
