@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Search By Image
-// @version     1.6.6(0.011)
+// @version     1.6.6(0.012)
 // @description Search By Image | 以图搜图
 // @match       <all_urls>
 // @include     *
@@ -257,7 +257,13 @@ function init() {
                     })
                 })
                 //-----------------------
-            document.body.appendChild(temp1);
+            setTimeout(() => {
+                var temp3 = document.body; //尝试解决某些网页会出现多个按钮的bug
+                //console.log(temp3.getElementsByTagName("iframe").length)
+                if (temp3 != null && temp3.getElementsByTagName("iframe").length > 0) {
+                    temp3.appendChild(temp1);
+                }
+            }, 1000);
         } catch (error) {
             //alert(error);
         }
@@ -302,7 +308,7 @@ function init() {
                             }
                             new_site_list['WhatAnime'] = default_setting.site_list['WhatAnime'];
 
-                            for (var i = 0; i < setting.site_option.length; i++) {
+                            for (let i = 0; i < setting.site_option.length; i++) {
                                 if ((setting.site_option[i] === 'Baidu ShiTu' || setting.site_option[i] === 'Baidu Image') && !(/,?Baidu,?/.test(new_site_option.join(',')))) {
                                     new_site_option.push('Baidu');
                                 } else {
@@ -683,6 +689,10 @@ if (typeof GM_registerMenuCommand !== 'undefined') {
 function resetx() {
     sessionStorage.removeItem("soutux");
     sessionStorage.removeItem("soutuy");
+    let temp = document.getElementsByClassName("soutucss2")
+        // console.log(temp)
+    temp[0].style.left = window.innerWidth * 0.89 + "px";
+    temp[0].style.bottom = "100px"; //不刷新就归位
     alert("已重置！");
 }
 GM_registerMenuCommand("重置为默认位置", resetx); // @grant        GM_registerMenuCommand
